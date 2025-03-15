@@ -26,7 +26,8 @@ Database: PostgreSQL / Firebase
 - Cloud Storage: Firebase Storage / AWS S3
 - Authentication: Firebase Authentication / OAuth
 
-Fitur :	Fitur pada Platform Web :
+Fitur :	
+Fitur pada Platform Web :
 User: Kepala Keluarga, Anggota Keluarga
 
 - Dashboard Keuangan: Ringkasan pemasukan, pengeluaran, dan anggaran.
