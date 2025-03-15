@@ -15,11 +15,13 @@ FinFam (Financial Family) hadir sebagai solusi digital untuk membantu keluarga m
 Deskripsi :               	FinFam adalah aplikasi pengelolaan keuangan keluarga yang dirancang untuk membantu setiap anggota keluarga mencatat pemasukan, mengatur pengeluaran, dan merencanakan anggaran dengan lebih efisien. Dengan fitur multi-user, laporan keuangan interaktif, serta integrasi dengan rekening bank dan e-wallet, FinFam memastikan transparansi dan kolaborasi dalam mengelola finansial keluarga. Keamanan data terjamin dengan enkripsi dan autentikasi pengguna, sehingga setiap transaksi tetap aman dan terkendali.
 
 
-Arsitektur Sistem :	- Frontend (Web & Mobile)
+Arsitektur Sistem :	
+- Frontend (Web & Mobile)
 Web: React.js
 Mobile: Flutter
 - Backend
-Laravel
+Mobile: Flutter
+Web : Laravel
 Database: PostgreSQL / Firebase
 - Cloud Storage: Firebase Storage / AWS S3
 - Authentication: Firebase Authentication / OAuth
@@ -42,7 +44,8 @@ User: Kepala Keluarga, Anggota Keluarga
 - Notifikasi Tagihan: Pengingat pembayaran yang jatuh tempo.
 - Mode Offline: Mencatat transaksi tanpa koneksi internet, dengan sinkronisasi otomatis saat online.
 
-Pembagian Tugas (2 Orang) :	- Orang 1 (Backend) : Development, Database, API Integration	Node.js, PostgreSQL, Firebase
+Pembagian Tugas (2 Orang) :	
+- Orang 1 (Backend) : Development, Database, API Integration	Node.js, PostgreSQL, Firebase
 
 - Orang 2 (Frontend) : Development (Web & Mobile), UI/UX Design	React.js, Flutter
 	
