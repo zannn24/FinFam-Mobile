@@ -52,6 +52,7 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.teal,
+        unselectedItemColor: Colors.grey,
         onTap: _onItemTapped,
         items: const [
           BottomNavigationBarItem(
@@ -76,17 +77,79 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class QuickTransactionPage extends StatelessWidget {
+class QuickTransactionPage extends StatefulWidget {
   const QuickTransactionPage({super.key});
 
   @override
+  _QuickTransactionPageState createState() => _QuickTransactionPageState();
+}
+
+class _QuickTransactionPageState extends State<QuickTransactionPage> {
+  final _formKey = GlobalKey<FormState>();
+  String _category = '';
+  double _amount = 0.0;
+
+  void _saveTransaction() {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Transaksi $_category sebesar Rp$_amount berhasil dicatat!')),
+      );
+      // Reset form
+      _formKey.currentState!.reset();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton(
-        onPressed: () {
-          // Fungsi untuk mencatat transaksi cepat
-        },
-        child: Text('Catat Transaksi Cepat'),
+    return Padding(
+      padding: EdgeInsets.all(16.0),
+      child: Form(
+        key: _formKey,
+        child: ListView(
+          children: [
+            TextFormField(
+              decoration: InputDecoration(
+                labelText: 'Kategori',
+                border: OutlineInputBorder(),
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Kategori tidak boleh kosong';
+                }
+                return null;
+              },
+              onSaved: (value) {
+                _category = value!;
+              },
+            ),
+            SizedBox(height: 16),
+            TextFormField(
+              decoration: InputDecoration(
+                labelText: 'Jumlah (Rp)',
+                border: OutlineInputBorder(),
+              ),
+              keyboardType: TextInputType.number,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Jumlah tidak boleh kosong';
+                }
+                if (double.tryParse(value) == null) {
+                  return 'Masukkan angka yang valid';
+                }
+                return null;
+              },
+              onSaved: (value) {
+                _amount = double.parse(value!);
+              },
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _saveTransaction,
+              child: Text('Simpan Transaksi'),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -98,7 +161,21 @@ class ReportPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Laporan Keuangan Ringkas'),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.bar_chart, size: 80, color: Colors.teal),
+          SizedBox(height: 20),
+          Text(
+            'Ringkasan Laporan Bulanan',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 10),
+          Text('Total Pemasukan: Rp5.000.000'),
+          Text('Total Pengeluaran: Rp3.000.000'),
+          Text('Sisa Anggaran: Rp2.000.000'),
+        ],
+      ),
     );
   }
 }
@@ -108,8 +185,21 @@ class NotificationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('Notifikasi Tagihan'),
+    return ListView(
+      children: const [
+        ListTile(
+          leading: Icon(Icons.notifications_active),
+          title: Text('Bayar tagihan listrik - 28 April'),
+        ),
+        ListTile(
+          leading: Icon(Icons.notifications_active),
+          title: Text('Bayar tagihan internet - 30 April'),
+        ),
+        ListTile(
+          leading: Icon(Icons.notifications_active),
+          title: Text('Cicilan mobil - 1 Mei'),
+        ),
+      ],
     );
   }
 }
@@ -119,8 +209,26 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('Pengaturan Akun'),
+    return ListView(
+      children: [
+        ListTile(
+          leading: Icon(Icons.account_circle),
+          title: Text('Profil Keluarga'),
+          onTap: () {},
+        ),
+        ListTile(
+          leading: Icon(Icons.lock),
+          title: Text('Keamanan'),
+          onTap: () {},
+        ),
+        ListTile(
+          leading: Icon(Icons.exit_to_app),
+          title: Text('Logout'),
+          onTap: () {
+            // Logout logic
+          },
+        ),
+      ],
     );
   }
 }
